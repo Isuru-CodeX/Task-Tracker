@@ -41,7 +41,7 @@ INSERT INTO `tasks` (`id`, `title`, `description`, `created_date`, `users_id`) V
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `fname` varchar(45) NOT NULL,
   `lname` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -50,9 +50,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Dumping data for table tasktracker.users: ~3 rows (approximately)
 INSERT INTO `users` (`id`, `email`, `password`, `fname`, `lname`) VALUES
-	(3, 'isuru@gmail.com', 'isuru123', 'Isuru', 'Rathnayaka'),
-	(4, 'chamal@gmail.com', 'chamal123', 'Chamal', 'Randika'),
-	(5, 'sadil@gmail.com', 'sadil123', 'Sadil', 'Mavindu');
+	(3, 'isuru@gmail.com', '$2a$10$vA/5sWGUm7iFFVuIXO2/iuA8IMeyee.6OOszbbAbvIPLseXH8gA72', 'Isuru', 'Rathnayaka'),
+	(4, 'chamal@gmail.com', '$2a$10$8DjnU7zgE4.QJ2jGD21jS.FIsPLB7vAn9rlkFWdQpgL4Y6RaDulVO', 'Chamal', 'Randika'),
+	(5, 'sadil@gmail.com', '$2a$10$3GjfapwAwdo0RpkH4tujueRdpeKdXdJGTRrC3rKifkxqW7DBYKPGa', 'Sadil', 'Mavindu');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

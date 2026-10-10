@@ -46,7 +46,10 @@ public class SignupServlet extends HttpServlet {
         u.setFname(p.firstName.trim());
         u.setLname(p.lastName.trim());
         u.setEmail(email);
-        u.setPassword(p.password);
+
+        // Hash the password
+        String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(p.password, org.mindrot.jbcrypt.BCrypt.gensalt());
+        u.setPassword(hashedPassword);
 
         dao.save(u);
 

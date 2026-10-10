@@ -3,23 +3,27 @@ package dao;
 import config.HibernateUtil;
 import model.User;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class UserDAO {
 
     public User findByEmail(String email) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        User user = session.createQuery("FROM User WHERE email = :e", User.class)
-                .setParameter("e", email)
-                .uniqueResult();
-        session.close();
-        return user;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM User WHERE email = :e", User.class)
+                    .setParameter("e", email)
+                    .uniqueResult();
+        }
     }
 
     public void save(User user) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
-        session.close();
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            session.save(user);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        }
     }
 }
