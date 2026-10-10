@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         UserDAO dao = new UserDAO();
         User user = dao.findByEmail(email);
 
-        if (user == null || !user.getPassword().equals(p.password)) {
+        if (user == null || !org.mindrot.jbcrypt.BCrypt.checkpw(p.password, user.getPassword())) {
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             resp.getWriter().write("{\"message\":\"Invalid email or password\"}");
             return;

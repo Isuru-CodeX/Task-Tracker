@@ -10,53 +10,61 @@ import java.util.List;
 public class TaskDAO {
 
     public void saveTask(Task task) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(task);
-        tx.commit();
-        session.close();
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            session.save(task);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        }
     }
 
     public List<Task> getAllTasks() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Task> list = session.createQuery("FROM Task", Task.class).list();
-        session.close();
-        return list;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Task", Task.class).list();
+        }
     }
 
     public List<Task> getTasksByUserId(int userId) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Task> list = session.createQuery("FROM Task WHERE userId = :uid", Task.class)
-                .setParameter("uid", userId)
-                .list();
-        session.close();
-        return list;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Task WHERE userId = :uid", Task.class)
+                    .setParameter("uid", userId)
+                    .list();
+        }
     }
 
-    // ✅ ADD THIS (Fix for UpdateTaskServlet)
     public Task getTaskById(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Task task = session.get(Task.class, id);
-        session.close();
-        return task;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.get(Task.class, id);
+        }
     }
 
     public void updateTask(Task task) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
-        session.update(task);
-        tx.commit();
-        session.close();
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            session.update(task);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        }
     }
 
     public void deleteTask(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
+        Transaction tx = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
 
-        Task task = session.get(Task.class, id);
-        if (task != null) session.delete(task);
+            Task task = session.get(Task.class, id);
+            if (task != null) session.delete(task);
 
-        tx.commit();
-        session.close();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        }
     }
 }
