@@ -8,8 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
+import com.google.gson.Gson;
 
 public class GetTasksServlet extends HttpServlet {
+
+    private static final Gson GSON = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd")
+            .create();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -28,10 +33,7 @@ public class GetTasksServlet extends HttpServlet {
 
         List<Task> tasks = new TaskDAO().getTasksByUserId(userId);
 
-        String json = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd")
-                .create()
-                .toJson(tasks);
+        String json = GSON.toJson(tasks);
 
         resp.setContentType("application/json");
         resp.getWriter().write(json);
