@@ -1,7 +1,7 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { getTasks, updateTask } from "../services/api";
+import { getTask, updateTask } from "../services/api";
 import { getUser } from "../services/authStorage";
 import { getGlobalStyles } from "./Theme";
 import { useTheme } from "./ThemeContext";
@@ -21,8 +21,7 @@ export default function UpdateTaskScreen() {
             const user = await getUser();
             if (!user) return router.replace("/login");
             try {
-                const list = await getTasks(user.userId);
-                const found = list.find((t) => t.id === Number(id));
+                const found = await getTask(Number(id), user.userId);
                 if (found) {
                     setTitle(found.title);
                     setDescription(found.description);

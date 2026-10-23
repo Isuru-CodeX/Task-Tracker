@@ -50,6 +50,12 @@ export const getTasks = async (userId: number): Promise<Task[]> => {
   return (await res.json()) as Task[];
 };
 
+export const getTask = async (id: number, userId: number): Promise<Task> => {
+  const res = await fetch(`${BASE_URL}/task?id=${id}&userId=${userId}`);
+  if (!res.ok) throw new Error(await readError(res));
+  return (await res.json()) as Task;
+};
+
 export const addTask = async (
   userId: number,
   title: string,
