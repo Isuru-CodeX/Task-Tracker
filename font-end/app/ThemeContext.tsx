@@ -22,7 +22,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         setTheme((prev) => {
             const next = prev === 'light' ? 'dark' : 'light';
             AsyncStorage.setItem('user-theme', next);
-            console.log("Theme switched to:", next);
             return next;
         });
     };
