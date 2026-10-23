@@ -10,6 +10,19 @@ import { getGlobalStyles } from "./Theme";
 import { useTheme } from "./ThemeContext";
 import { ThemeToggle } from "./ThemeToggle";
 
+const formatDate = (value?: string) => {
+    if (!value) return "";
+    const normalized = value.replace(" ", "T").replace(".0", "");
+    const d = new Date(normalized);
+    if (isNaN(d.getTime())) return value;
+
+    return d.toLocaleDateString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
+};
+
 export default function TaskListScreen() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState(false);
@@ -25,25 +38,12 @@ export default function TaskListScreen() {
                 return;
             }
             const data = await apiGetTasks(user.userId);
-            setTasks(data);
+            setTasks(data.map((task: Task) => ({ ...task, formattedDate: formatDate(task.createdDate) })));
         } catch (e: any) {
             Alert.alert("Error", e.message || "Failed to load tasks");
         } finally {
             setLoading(false);
         }
-    };
-
-    const formatDate = (value?: string) => {
-        if (!value) return "";
-        const normalized = value.replace(" ", "T").replace(".0", "");
-        const d = new Date(normalized);
-        if (isNaN(d.getTime())) return value;
-
-        return d.toLocaleDateString(undefined, {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-        });
     };
 
     const handleDelete = (id: number) => {
@@ -117,11 +117,11 @@ export default function TaskListScreen() {
                                 </Text>
 
                                 {/* Created Date Display */}
-                                {item.createdDate && (
+                                {item.formattedDate && (
                                     <View style={styles.dateContainer}>
                                         <Ionicons name="calendar-outline" size={12} color={Colors.subtext} />
                                         <Text style={[styles.dateText, { color: Colors.subtext }]}>
-                                            {formatDate(item.createdDate)}
+                                            {item.formattedDate}
                                         </Text>
                                     </View>
                                 )}
