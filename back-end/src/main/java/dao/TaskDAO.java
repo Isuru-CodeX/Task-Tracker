@@ -53,8 +53,9 @@ public class TaskDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
-        Task task = session.get(Task.class, id);
-        if (task != null) session.delete(task);
+        session.createQuery("DELETE FROM Task WHERE id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
 
         tx.commit();
         session.close();
