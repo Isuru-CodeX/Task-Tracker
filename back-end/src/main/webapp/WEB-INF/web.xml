@@ -17,6 +17,16 @@
         <url-pattern>/tasks</url-pattern>
     </servlet-mapping>
 
+    <!-- GET TASK -->
+    <servlet>
+        <servlet-name>getTask</servlet-name>
+        <servlet-class>servlet.GetTaskServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getTask</servlet-name>
+        <url-pattern>/task</url-pattern>
+    </servlet-mapping>
+
     <!-- ADD TASK -->
     <servlet>
         <servlet-name>addTask</servlet-name>
