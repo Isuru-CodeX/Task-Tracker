@@ -17,13 +17,6 @@ public class TaskDAO {
         session.close();
     }
 
-    public List<Task> getAllTasks() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Task> list = session.createQuery("FROM Task", Task.class).list();
-        session.close();
-        return list;
-    }
-
     public List<Task> getTasksByUserId(int userId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Task> list = session.createQuery("FROM Task WHERE userId = :uid", Task.class)
