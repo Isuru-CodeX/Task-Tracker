@@ -33,7 +33,6 @@ public class TaskDAO {
         return list;
     }
 
-    // ✅ ADD THIS (Fix for UpdateTaskServlet)
     public Task getTaskById(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Task task = session.get(Task.class, id);
