@@ -2,7 +2,7 @@
 
 ## About The Project
 
-TaskTracker is a comprehensive, full-stack web application designed to help individual users efficiently organize, manage, and track their daily tasks and priorities. Built with a robust Java backend utilizing Jakarta Servlets and Hibernate ORM, it seamlessly integrates with a MySQL database to ensure secure data persistence, reliable task state management, and personalized task mapping for each registered account. Whether you are managing personal daily to-dos or structuring long-term project deliverables, TaskTracker provides a clean interface and structured REST API endpoints to streamline your productivity workflow.
+TaskTracker is a comprehensive, full-stack application designed to help individual users efficiently organize, manage, and track their daily tasks and priorities. Built with a robust Java backend utilizing Jakarta Servlets and Hibernate ORM, it seamlessly integrates with a MySQL database to ensure secure data persistence, reliable task state management, and personalized task mapping for each registered account. The frontend is built with React Native and Expo, offering a native mobile experience. Whether you are managing personal daily to-dos or structuring long-term project deliverables, TaskTracker provides a clean interface and structured REST API endpoints to streamline your productivity workflow.
 
 ---
 
@@ -12,6 +12,7 @@ TaskTracker is a comprehensive, full-stack web application designed to help indi
 * **Task Management:** Full CRUD functionality (Create, Read, Update, Delete) for daily tasks and to-dos.
 * **User-Specific Tasks:** Account isolation ensuring user tasks map directly to individual accounts.
 * **Database Integration:** Relational persistence handled via Hibernate ORM with MySQL database storage.
+* **Mobile Experience:** Cross-platform mobile frontend built with React Native and Expo.
 
 ---
 
@@ -19,17 +20,17 @@ TaskTracker is a comprehensive, full-stack web application designed to help indi
 
 * **Backend:** Java, Jakarta Servlets, Hibernate ORM, Maven
 * **Database:** MySQL 8.0+
-* **Frontend:** HTML5, CSS3, JavaScript / REST APIs
-* **Tools & Server:** Apache Tomcat, HeidiSQL / MySQL Workbench
+* **Frontend:** React Native, Expo, TypeScript
+* **Tools & Server:** Apache Tomcat, HeidiSQL / MySQL Workbench, Node.js
 
 ---
 
 ## 📁 Repository Structure
 
 ```text
-├── backend/         # Java Servlet & Hibernate Backend API (Maven Project)
+├── back-end/        # Java Servlet & Hibernate Backend API (Maven Project)
 ├── database/        # Database setup and schema SQL scripts
-├── frontend/        # Web client source code
+├── font-end/        # React Native (Expo) client source code
 ├── .gitignore       # Git ignore settings
 └── README.md        # Project documentation
 ```
@@ -45,6 +46,7 @@ Ensure you have the following installed on your local machine:
 * **Apache Maven**
 * **MySQL Server 8.0+**
 * **Apache Tomcat Server** (v9+ / v10+)
+* **Node.js** (for frontend)
 
 ---
 
@@ -57,13 +59,13 @@ Ensure you have the following installed on your local machine:
 SOURCE database/database.sql;
 ```
 
-3. Update the database configuration in `backend/src/main/resources/hibernate.cfg.xml` with your local MySQL credentials:
-
-```xml
-<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/tasktracker</property>
-<property name="hibernate.connection.username">YOUR_MYSQL_USERNAME</property>
-<property name="hibernate.connection.password">YOUR_MYSQL_PASSWORD</property>
+3. Ensure the environment variables `DB_USER` and `DB_PASSWORD` are set in your execution environment to configure Hibernate securely.
+```bash
+export DB_USER=YOUR_MYSQL_USERNAME
+export DB_PASSWORD=YOUR_MYSQL_PASSWORD
 ```
+
+*(Note: The execution sandbox environment may lack a pre-configured MySQL/MariaDB server, which prevents the execution of database-dependent backend code or performance benchmarks without mocking.)*
 
 ---
 
@@ -71,13 +73,36 @@ SOURCE database/database.sql;
 
 1. Navigate to the backend directory:
    ```bash
-   cd backend
+   cd back-end
    ```
 2. Build the Maven package:
    ```bash
    mvn clean package
    ```
 3. Deploy the generated `.war` file onto your Apache Tomcat application server, or run it directly through your IDE (IntelliJ IDEA / Eclipse).
+
+---
+
+### 4. Frontend Setup
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd font-end
+   ```
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the Expo development server:
+   ```bash
+   npm start
+   ```
+
+To run tests and linting on the frontend:
+```bash
+npm run test
+npm run lint
+```
 
 ---
 
