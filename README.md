@@ -1,75 +1,84 @@
 # TaskTracker 📝
 
-## About The Project
-
 TaskTracker is a comprehensive, full-stack application designed to help individual users efficiently organize, manage, and track their daily tasks and priorities. Built with a robust Java backend utilizing Jakarta Servlets and Hibernate ORM, it seamlessly integrates with a MySQL database to ensure secure data persistence, reliable task state management, and personalized task mapping for each registered account. The frontend is built with React Native and Expo, offering a native mobile experience. Whether you are managing personal daily to-dos or structuring long-term project deliverables, TaskTracker provides a clean interface and structured REST API endpoints to streamline your productivity workflow.
 
----
+## Features
 
-## 🚀 Features
+- **User Authentication:** Secure user registration, authentication, and session management.
+- **Task Management:** Full CRUD functionality (Create, Read, Update, Delete) for daily tasks and to-dos.
+- **User-Specific Tasks:** Account isolation ensuring user tasks map directly to individual accounts.
+- **Database Integration:** Relational persistence handled via Hibernate ORM with MySQL database storage.
+- **Mobile Experience:** Cross-platform mobile frontend built with React Native and Expo.
 
-* **User Authentication:** Secure user registration, authentication, and session management.
-* **Task Management:** Full CRUD functionality (Create, Read, Update, Delete) for daily tasks and to-dos.
-* **User-Specific Tasks:** Account isolation ensuring user tasks map directly to individual accounts.
-* **Database Integration:** Relational persistence handled via Hibernate ORM with MySQL database storage.
-* **Mobile Experience:** Cross-platform mobile frontend built with React Native and Expo.
+## Technologies Used
 
----
+- **Frontend:** React Native, Expo, TypeScript
+- **Backend:** Java, Jakarta Servlets, Hibernate ORM
+- **Database:** MySQL 8.0+
+- **Tools:** Maven, Apache Tomcat, Node.js, Git, HeidiSQL / MySQL Workbench
 
-## 🛠️ Tech Stack
+## Screenshots
 
-* **Backend:** Java, Jakarta Servlets, Hibernate ORM, Maven
-* **Database:** MySQL 8.0+
-* **Frontend:** React Native, Expo, TypeScript
-* **Tools & Server:** Apache Tomcat, HeidiSQL / MySQL Workbench, Node.js
+*Add screenshots of the application's main pages here.*
 
----
+*(Example placeholder)*
+![Application Screenshot](font-end/assets/images/splash-icon.png)
 
-## 📁 Repository Structure
+## Prerequisites
 
-```text
-├── back-end/        # Java Servlet & Hibernate Backend API (Maven Project)
-├── database/        # Database setup and schema SQL scripts
-├── font-end/        # React Native (Expo) client source code
-├── .gitignore       # Git ignore settings
-└── README.md        # Project documentation
-```
+Before running the project, install the required software:
 
----
+- **JDK 11** or higher
+- **Apache Maven**
+- **MySQL Server 8.0+**
+- **Apache Tomcat Server** (v9+ / v10+)
+- **Node.js** (for frontend)
+- **Git**
 
-## 💻 Getting Started
+## Installation
 
-### 1. Prerequisites
+1. Clone the repository:
 
-Ensure you have the following installed on your local machine:
-* **JDK 11** or higher
-* **Apache Maven**
-* **MySQL Server 8.0+**
-* **Apache Tomcat Server** (v9+ / v10+)
-* **Node.js** (for frontend)
+   ```bash
+   git clone https://github.com/your-username/tasktracker.git
+   ```
 
----
+2. Open the project directory:
 
-### 2. Database Setup
+   ```bash
+   cd tasktracker
+   ```
+
+3. Setup both Backend and Frontend dependencies as described below.
+
+4. Configure the database and environment variables.
+
+## Database Setup
 
 1. Open your database management tool (HeidiSQL, MySQL Workbench, or CLI).
-2. Create and import the database schema using the script located in `/database`:
+2. Create the required database.
+3. Import the SQL file provided in the repository:
 
-```sql
-SOURCE database/database.sql;
-```
+   ```sql
+   SOURCE database/database.sql;
+   ```
 
-3. Ensure the environment variables `DB_USER` and `DB_PASSWORD` are set in your execution environment to configure Hibernate securely.
+4. Configure the database connection using your local environment variables.
+
+## Configuration
+
+Set the required environment variables in your execution environment to configure Hibernate securely.
+
 ```bash
 export DB_USER=YOUR_MYSQL_USERNAME
 export DB_PASSWORD=YOUR_MYSQL_PASSWORD
 ```
 
-*(Note: The execution sandbox environment may lack a pre-configured MySQL/MariaDB server, which prevents the execution of database-dependent backend code or performance benchmarks without mocking.)*
+*Note: Do not commit real passwords, API keys, or other secrets.*
 
----
+## Running the Project
 
-### 3. Backend Setup
+### Backend Setup
 
 1. Navigate to the backend directory:
    ```bash
@@ -81,9 +90,7 @@ export DB_PASSWORD=YOUR_MYSQL_PASSWORD
    ```
 3. Deploy the generated `.war` file onto your Apache Tomcat application server, or run it directly through your IDE (IntelliJ IDEA / Eclipse).
 
----
-
-### 4. Frontend Setup
+### Frontend Setup
 
 1. Navigate to the frontend directory:
    ```bash
@@ -98,15 +105,7 @@ export DB_PASSWORD=YOUR_MYSQL_PASSWORD
    npm start
    ```
 
-To run tests and linting on the frontend:
-```bash
-npm run test
-npm run lint
-```
-
----
-
-## 📡 API Endpoints
+## API Endpoints
 
 | Method | Endpoint             | Description              |
 | :----- | :------------------- | :----------------------- |
@@ -117,8 +116,53 @@ npm run lint
 | `POST` | `/UpdateTaskServlet` | Update existing task     |
 | `POST` | `/DeleteTaskServlet` | Delete a task            |
 
----
+## Project Structure
 
-## 📄 License
+```text
+tasktracker/
+├── back-end/        # Java Servlet & Hibernate Backend API (Maven Project)
+├── database/        # Database setup and schema SQL scripts
+├── font-end/        # React Native (Expo) client source code
+├── .gitignore       # Git ignore settings
+└── README.md        # Project documentation
+```
+
+## Testing
+
+### Frontend
+To run the automated tests and linting on the frontend, navigate to the `font-end` directory and run:
+
+```bash
+cd font-end
+npm run test
+npm run lint
+```
+
+### Backend
+The backend currently lacks an automated test suite. Setting up JUnit for testing servlets and Hibernate mappings is planned for the future.
+
+## Known Issues
+
+- The execution sandbox environment may lack a pre-configured MySQL/MariaDB server, which prevents the execution of database-dependent backend code or performance benchmarks without mocking.
+- The `jest-expo` dependency version must match the installed `expo` version in the `font-end` directory to prevent Jest suite execution failures.
+
+## Future Improvements
+
+- Add a comprehensive automated test suite (JUnit) for the backend.
+- Enhance error handling and input validation in both backend servlets and frontend forms.
+- Introduce advanced task features like categories, due dates, and reminders.
+- Implement token-based authentication (JWT) for improved security over session management.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
 
 This project is open-source and available under the [MIT License](LICENSE).
