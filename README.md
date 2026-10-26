@@ -17,13 +17,6 @@ TaskTracker is a comprehensive, full-stack application designed to help individu
 - **Database:** MySQL 8.0+
 - **Tools:** Maven, Apache Tomcat, Node.js, Git, HeidiSQL / MySQL Workbench
 
-## Screenshots
-
-*Add screenshots of the application's main pages here.*
-
-*(Example placeholder)*
-![Application Screenshot](font-end/assets/images/splash-icon.png)
-
 ## Prerequisites
 
 Before running the project, install the required software:
