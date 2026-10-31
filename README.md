@@ -2,6 +2,37 @@
 
 TaskTracker is a comprehensive, full-stack application designed to help individual users efficiently organize, manage, and track their daily tasks and priorities. Built with a robust Java backend utilizing Jakarta Servlets and Hibernate ORM, it seamlessly integrates with a MySQL database to ensure secure data persistence, reliable task state management, and personalized task mapping for each registered account. The frontend is built with React Native and Expo, offering a native mobile experience. Whether you are managing personal daily to-dos or structuring long-term project deliverables, TaskTracker provides a clean interface and structured REST API endpoints to streamline your productivity workflow.
 
+## Table of Contents
+
+- [Architecture Overview](#architecture-overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Database Setup](#database-setup)
+- [Configuration](#configuration)
+- [Running the Project](#running-the-project)
+- [API Endpoints](#api-endpoints)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+- [Known Issues](#known-issues)
+- [Future Improvements](#future-improvements)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Architecture Overview
+
+TaskTracker follows a classic multi-tier architecture, dividing responsibilities into distinct layers for maintainability, scalability, and security.
+
+### Frontend Architecture
+The mobile client is built using **React Native** and **Expo**, providing a single codebase that runs on both iOS and Android. It uses functional components and hooks for state management. Navigation is handled by Expo Router, offering a seamless user experience. Networking is implemented via the Fetch API, calling our custom REST endpoints securely. The user interface emphasizes ease of use, leveraging Expo's native modules to deliver a fast and responsive mobile experience.
+
+### Backend Architecture
+The backend is a monolithic service built with **Java** and **Jakarta Servlets**, deployed typically on an Apache Tomcat server. It receives HTTP requests, processes business logic, and manages data persistence. We use **Hibernate ORM** to abstract database interactions, mapping our Java domain models (such as `User` and `Task`) directly to our relational database schema. This decoupled design allows us to scale the backend application layer independently of the database.
+
+### Database Architecture
+Data is persisted in a **MySQL** relational database. The schema consists of two primary tables: `users` and `tasks`. A one-to-many relationship links users to their specific tasks using foreign key constraints (`fk_tasks_users`), enforcing referential integrity. The database is strictly normalized to minimize redundancy.
+
 ## Features
 
 - **User Authentication:** Secure user registration, authentication, and session management.
@@ -111,6 +142,7 @@ export DB_PASSWORD=YOUR_MYSQL_PASSWORD
 
 ## Project Structure
 
+### Root Overview
 ```text
 tasktracker/
 ├── back-end/        # Java Servlet & Hibernate Backend API (Maven Project)
@@ -119,6 +151,23 @@ tasktracker/
 ├── .gitignore       # Git ignore settings
 └── README.md        # Project documentation
 ```
+
+### Detailed Component Breakdown
+
+**Frontend (`font-end/`)**
+- `app/`: Contains the Expo Router file-based navigation screens (e.g., `login.tsx`, `tasks.tsx`).
+- `services/`: API interaction logic (`api.ts`) and local storage (`authStorage.ts`).
+- `models/`: TypeScript interfaces representing domain objects (`Task.ts`).
+- `assets/`: Static resources like fonts and images.
+
+**Backend (`back-end/`)**
+- `src/main/java/servlet/`: Controller classes handling incoming HTTP requests.
+- `src/main/java/model/`: JPA entities mapping to database tables.
+- `src/main/java/dao/`: Data Access Objects interacting directly with Hibernate.
+- `src/main/java/config/`: Configuration classes like `HibernateUtil` for database session management.
+
+**Database (`database/`)**
+- `database.sql`: The primary dump file for creating the schema and seeding initial testing data.
 
 ## Testing
 
