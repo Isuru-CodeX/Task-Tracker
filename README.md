@@ -2,44 +2,9 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6366f1,100:312e81&height=230&section=header&text=TaskTracker&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Full-Stack%20Task%20Management%20%E2%80%A2%20Mobile%20%2B%20Java%20API&descAlignY=58&descSize=20" width="100%" alt="TaskTracker banner" />
 
-<<<<<<< HEAD
 <a href="https://github.com/Isuru-CodeX/Task-Tracker">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=818CF8&center=true&vCenter=true&width=700&lines=Organize+your+day%2C+one+task+at+a+time;React+Native+%2B+Expo+mobile+app;Java+Servlets+%2B+Hibernate+REST+backend;Every+user+gets+their+own+private+task+list" alt="Typing animation" />
 </a>
-=======
-## Table of Contents
-
-- [Architecture Overview](#architecture-overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Database Setup](#database-setup)
-- [Configuration](#configuration)
-- [Running the Project](#running-the-project)
-- [API Endpoints](#api-endpoints)
-- [Project Structure](#project-structure)
-- [Testing](#testing)
-- [Known Issues](#known-issues)
-- [Future Improvements](#future-improvements)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Architecture Overview
-
-TaskTracker follows a classic multi-tier architecture, dividing responsibilities into distinct layers for maintainability, scalability, and security.
-
-### Frontend Architecture
-The mobile client is built using **React Native** and **Expo**, providing a single codebase that runs on both iOS and Android. It uses functional components and hooks for state management. Navigation is handled by Expo Router, offering a seamless user experience. Networking is implemented via the Fetch API, calling our custom REST endpoints securely. The user interface emphasizes ease of use, leveraging Expo's native modules to deliver a fast and responsive mobile experience.
-
-### Backend Architecture
-The backend is a monolithic service built with **Java** and **Jakarta Servlets**, deployed typically on an Apache Tomcat server. It receives HTTP requests, processes business logic, and manages data persistence. We use **Hibernate ORM** to abstract database interactions, mapping our Java domain models (such as `User` and `Task`) directly to our relational database schema. This decoupled design allows us to scale the backend application layer independently of the database.
-
-### Database Architecture
-Data is persisted in a **MySQL** relational database. The schema consists of two primary tables: `users` and `tasks`. A one-to-many relationship links users to their specific tasks using foreign key constraints (`fk_tasks_users`), enforcing referential integrity. The database is strictly normalized to minimize redundancy.
-
-## Features
->>>>>>> 90ba9ca3fafb19c1cfbeef1fcecf20ed533771bd
 
 <br/>
 
@@ -183,81 +148,12 @@ export DB_PASSWORD=YOUR_MYSQL_PASSWORD
 
 **1️⃣ Backend**
 
-<<<<<<< HEAD
 ```bash
 cd back-end
 mvn clean package
 ```
 
 Deploy the generated `.war` to Tomcat, or run it from IntelliJ IDEA / Eclipse.
-=======
-1. Navigate to the backend directory:
-   ```bash
-   cd back-end
-   ```
-2. Build the Maven package:
-   ```bash
-   mvn clean package
-   ```
-3. Deploy the generated `.war` file onto your Apache Tomcat application server, or run it directly through your IDE (IntelliJ IDEA / Eclipse).
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-   ```bash
-   cd font-end
-   ```
-2. Install the dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Expo development server:
-   ```bash
-   npm start
-   ```
-
-## API Endpoints
-
-| Method | Endpoint             | Description              |
-| :----- | :------------------- | :----------------------- |
-| `POST` | `/SignupServlet`     | Register a new user      |
-| `POST` | `/LoginServlet`      | Authenticate existing user |
-| `GET`  | `/GetTasksServlet`   | Fetch tasks for user     |
-| `POST` | `/AddTaskServlet`    | Add a new task           |
-| `POST` | `/UpdateTaskServlet` | Update existing task     |
-| `POST` | `/DeleteTaskServlet` | Delete a task            |
-
-## Project Structure
-
-### Root Overview
-```text
-tasktracker/
-├── back-end/        # Java Servlet & Hibernate Backend API (Maven Project)
-├── database/        # Database setup and schema SQL scripts
-├── font-end/        # React Native (Expo) client source code
-├── .gitignore       # Git ignore settings
-└── README.md        # Project documentation
-```
-
-### Detailed Component Breakdown
-
-**Frontend (`font-end/`)**
-- `app/`: Contains the Expo Router file-based navigation screens (e.g., `login.tsx`, `tasks.tsx`).
-- `services/`: API interaction logic (`api.ts`) and local storage (`authStorage.ts`).
-- `models/`: TypeScript interfaces representing domain objects (`Task.ts`).
-- `assets/`: Static resources like fonts and images.
-
-**Backend (`back-end/`)**
-- `src/main/java/servlet/`: Controller classes handling incoming HTTP requests.
-- `src/main/java/model/`: JPA entities mapping to database tables.
-- `src/main/java/dao/`: Data Access Objects interacting directly with Hibernate.
-- `src/main/java/config/`: Configuration classes like `HibernateUtil` for database session management.
-
-**Database (`database/`)**
-- `database.sql`: The primary dump file for creating the schema and seeding initial testing data.
-
-## Testing
->>>>>>> 90ba9ca3fafb19c1cfbeef1fcecf20ed533771bd
 
 **2️⃣ Frontend** *(in a new terminal)*
 
